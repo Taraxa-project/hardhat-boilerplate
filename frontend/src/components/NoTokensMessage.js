@@ -5,10 +5,14 @@ export function NoTokensMessage({ selectedAddress }) {
     <>
       <p>You don't have tokens to transfer</p>
       <p>
-        To get some tokens, open a terminal in the root of the repository and run: 
-        <br />
-        <br />
-        <code>npx hardhat --network localhost faucet {selectedAddress}</code>
+        To get some tokens, go to the{" "}
+        <a
+          href="https://testnet.explorer.taraxa.io/faucet"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Official Taraxa Testnet Faucet
+        </a>
       </p>
     </>
   );
