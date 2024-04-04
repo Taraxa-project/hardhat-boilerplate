@@ -22,11 +22,12 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("Token");
-  const token = await Token.deploy();
+  const Token = await ethers.getContractFactory("TetherToken");
+  const initialSupply = ethers.utils.parseEther("10000000000");
+  const token = await Token.deploy(initialSupply, "Tether", "USDT", 6);
   await token.deployed();
 
-  console.log("Token address:", token.address);
+  console.log("Tether address:", token.address);
 
   // We also save the contract's artifacts and address in the frontend directory
   saveFrontendFiles(token);
@@ -34,7 +35,13 @@ async function main() {
 
 function saveFrontendFiles(token) {
   const fs = require("fs");
-  const contractsDir = path.join(__dirname, "..", "frontend", "src", "contracts");
+  const contractsDir = path.join(
+    __dirname,
+    "..",
+    "frontend",
+    "src",
+    "contracts"
+  );
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
@@ -45,10 +52,10 @@ function saveFrontendFiles(token) {
     JSON.stringify({ Token: token.address }, undefined, 2)
   );
 
-  const TokenArtifact = artifacts.readArtifactSync("Token");
+  const TokenArtifact = artifacts.readArtifactSync("TetherToken");
 
   fs.writeFileSync(
-    path.join(contractsDir, "Token.json"),
+    path.join(contractsDir, "TetherToken.json"),
     JSON.stringify(TokenArtifact, null, 2)
   );
 }

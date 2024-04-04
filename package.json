@@ -4,7 +4,9 @@
   "description": "A boilerplate repository to get you started with Hardhat and Ethereum development",
   "scripts": {
     "test": "hardhat test",
+    "compile": "hardhat compile",
     "deploy": "npx hardhat run scripts/deploy.js --network testnet",
+    "faucet-example": "npx hardhat faucet 0xDc600D35C926EEcB231201CD38A37eF4c9f8cAD3 --network testnet",
     "frontend": "cd frontend && npm run start"
   },
   "repository": {
